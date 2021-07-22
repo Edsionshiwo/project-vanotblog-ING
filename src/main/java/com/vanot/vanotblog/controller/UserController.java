@@ -1,6 +1,7 @@
 package com.vanot.vanotblog.controller;
 
 
+import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.vanot.vanotblog.common.lang.Result;
 import com.vanot.vanotblog.entity.User;
@@ -27,6 +28,8 @@ public class UserController {
 
     @GetMapping("/addOne")
     public void addOne(){
+        System.out.println("1111111");
+
         String username = "root";
         String password = "123456";
         Integer status = 0;

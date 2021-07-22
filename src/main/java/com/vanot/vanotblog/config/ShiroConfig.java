@@ -27,23 +27,19 @@ import java.util.Map;
 /**
  * shiro启用注解拦截控制器
  */
+/**
+ * shiro启用注解拦截控制器
+ */
 @Configuration
 public class ShiroConfig {
     @Autowired
     JwtFilter jwtFilter;
-
-    /**
-     * 将会话信息 session 储存到 Redis
-     * @param redisSessionDAO
-     * @return
-     */
     @Bean
     public SessionManager sessionManager(RedisSessionDAO redisSessionDAO) {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         sessionManager.setSessionDAO(redisSessionDAO);
         return sessionManager;
     }
-
     @Bean
     public DefaultWebSecurityManager securityManager(AccountRealm accountRealm,
                                                      SessionManager sessionManager,
@@ -61,7 +57,6 @@ public class ShiroConfig {
         securityManager.setSubjectDAO(subjectDAO);
         return securityManager;
     }
-
     @Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition() {
         DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
@@ -70,11 +65,11 @@ public class ShiroConfig {
         chainDefinition.addPathDefinitions(filterMap);
         return chainDefinition;
     }
-
     @Bean("shiroFilterFactoryBean")
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager,
                                                          ShiroFilterChainDefinition shiroFilterChainDefinition) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
+        shiroFilter.setSecurityManager(securityManager);
         Map<String, Filter> filters = new HashMap<>();
         filters.put("jwt", jwtFilter);
         shiroFilter.setFilters(filters);
@@ -82,7 +77,6 @@ public class ShiroConfig {
         shiroFilter.setFilterChainDefinitionMap(filterMap);
         return shiroFilter;
     }
-
     // 开启注解代理（默认好像已经开启，可以不要）
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
@@ -90,7 +84,6 @@ public class ShiroConfig {
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
     }
-
     @Bean
     public static DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
         DefaultAdvisorAutoProxyCreator creator = new DefaultAdvisorAutoProxyCreator();
