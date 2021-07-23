@@ -10,6 +10,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @MapperScan("com.vanot.vanotblog.mapper")
 public class MybatisPlusConfig {
+    /**
+     * Bean 注解
+     * 注解 Bean Factory 生成实例的方法，通过 DI 注入到 IoC 容器
+     */
     @Bean
     public PaginationInterceptor paginationInterceptor() {
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();

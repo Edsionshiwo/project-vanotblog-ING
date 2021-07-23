@@ -7,6 +7,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * 解决跨域问题
  */
+
+/**
+ * Configuration 注解
+ * 定义配置类 用来代替 xml 配置文件注入
+ */
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
 

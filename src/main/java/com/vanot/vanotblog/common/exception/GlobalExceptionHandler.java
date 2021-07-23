@@ -16,10 +16,26 @@ import java.io.IOException;
 /**
  * 全局异常处理
  */
+
+/**
+ * Slf4j 注解
+ * 免去了 private final Logger logger = LoggerFactory.getLogger(当前类名.class); 的麻烦
+ * 直接 log 即可
+ */
 @Slf4j
+/**
+ * RestControllerAdvice 注解
+ * 对 RestController 控制器起作用
+ * 处理全局异常
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     // 捕捉shiro的异常
+
+    /**
+     * ResponseStatus 注解
+     * 说明 HTTP 请求状态
+     */
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(ShiroException.class)
     public Result handle401(ShiroException e) {

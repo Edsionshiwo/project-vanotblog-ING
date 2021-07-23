@@ -10,6 +10,7 @@ import com.vanot.vanotblog.service.UserService;
 import com.vanot.vanotblog.util.JwtUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.crypto.hash.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
@@ -19,10 +20,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 
 @RestController
 public class AccountController {
 
+    /**
+     * Autowired 注解
+     * 自动从工厂中获取需要的实例
+     */
     @Autowired
     UserService userService;
 
@@ -42,6 +48,8 @@ public class AccountController {
 
         response.setHeader("Authorization", jwt);
         response.setHeader("Access-control-Expose-Headers", "Authorization");
+
+        HashMap<String, String> map;
 
         return Result.succ(MapUtil.builder()
                 .put("id", user.getId())
