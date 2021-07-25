@@ -18,7 +18,6 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
-            <el-button @click="resetForm('ruleForm')">重置</el-button>
           </el-form-item>
         </el-form>
       </el-main>
@@ -29,7 +28,7 @@
 export default {
   name: 'Login',
   data () {
-    var validatePass = (rule, value, callback) => {
+    const validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'))
       } else {
@@ -38,8 +37,8 @@ export default {
     }
     return {
       ruleForm: {
-        password: '111111',
-        username: 'markerhub'
+        password: '',
+        username: ''
       },
       rules: {
         password: [
@@ -69,9 +68,6 @@ export default {
           return false
         }
       })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     }
   }
 }

@@ -12,6 +12,7 @@
 <script>
 import 'github-markdown-css/github-markdown.css' // 然后添加样式markdown-body
 import Header from '@/components/Header'
+
 export default {
   name: 'BlogDetail',
   components: {
@@ -36,10 +37,9 @@ export default {
         console.log(res)
         console.log(res.data.data)
         _this.blog = res.data.data
-        var MarkdownIt = require('markdown-it')
-        var md = new MarkdownIt()
-        var result = md.render(_this.blog.content)
-        _this.blog.content = result
+        const MarkdownIt = require('markdown-it')
+        const md = new MarkdownIt()
+        _this.blog.content = md.render(_this.blog.content)
         // 判断是否是自己的文章，能否编辑
         _this.ownBlog = (_this.blog.userId === _this.$store.getters.getUser.id)
       })
