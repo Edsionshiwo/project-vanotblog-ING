@@ -3,16 +3,22 @@ import Element from 'element-ui'
 import store from '@/store'
 import router from '@/router'
 
-axios.defaults.baseURL = 'http://localhost:8081'
+axios.defaults.baseURL = process.env.VUE_APP_BASE_API
+axios.defaults.timeout = 5000
+// axios.defaults.withCredentials = true
+
 axios.interceptors.request.use(config => {
   console.log('前置拦截')
   // 可以统一设置请求头
   return config
+},
+error => {
+  console.log(error)// for debug
+  return Promise.reject(error)
 })
 axios.interceptors.response.use(response => {
   const res = response.data
   console.log('后置拦截')
-  // 当结果的code是否为200的情况
   if (res.code === 200) {
     return response
   } else {
@@ -27,11 +33,11 @@ axios.interceptors.response.use(response => {
   }
 },
 error => {
-  console.log('err' + error)// for debug
+  console.log(error)// for debug
   if (error.response.data) {
     error.message = error.response.data.msg
   }
-  // 根据请求状态觉得是否登录或者提示其他
+  // 未登录
   if (error.response.status === 401) {
     store.commit('REMOVE_INFO')
     router.push({
@@ -39,6 +45,7 @@ error => {
     })
     error.message = '请重新登录'
   }
+  // 权限不足
   if (error.response.status === 403) {
     error.message = '权限不足，无法访问'
   }

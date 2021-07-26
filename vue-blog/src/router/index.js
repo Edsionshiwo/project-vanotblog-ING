@@ -5,6 +5,12 @@ import Blogs from '@/views/Blogs.vue'
 import BlogEdit from '@/views/BlogEdit.vue'
 import BlogDetail from '@/views/BlogDetail.vue'
 
+import home from '@/views/home'
+import about from '@/views/about'
+import article from '@/views/article'
+import archive from '@/views/archive'
+import apply from '@/views/apply'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -43,6 +49,45 @@ const routes = [
     meta: {
       requireAuth: true
     }
+  },
+
+  {
+    path: '/',
+    component: home
+  },
+  {
+    path: '/home',
+    name: 'home',
+    component: home
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: about
+  },
+  {
+    path: '/archive',
+    name: 'archive',
+    component: archive
+  },
+  {
+    path: '/tag/:name',
+    name: 'tag',
+    component: archive
+  },
+  {
+    path: '/article',
+    name: 'article',
+    component: article
+  },
+  {
+    path: '/apply',
+    name: 'apply',
+    component: apply
+  },
+  {
+    path: '*',
+    redirect: '/'
   }
 ]
 

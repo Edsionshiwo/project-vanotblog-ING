@@ -3,7 +3,7 @@
     <el-container>
       <el-header>
         <router-link to="/blogs">
-          <img src="https://www.markerhub.com/dist/images/logo/markerhub-logo.png"
+          <img src="@/assets/logo.png"
                style="height: 60%; margin-top: 10px;">
         </router-link>
       </el-header>
@@ -57,7 +57,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // 提交逻辑
-          this.$axios.post('http://localhost/login', this.ruleForm).then((res) => {
+          this.$axios.post('/login', this.ruleForm).then((res) => {
             const token = res.headers.authorization
             _this.$store.commit('SET_TOKEN', token)
             _this.$store.commit('SET_USERINFO', res.data.data)

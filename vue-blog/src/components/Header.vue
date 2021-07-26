@@ -39,7 +39,7 @@ export default {
   methods: {
     logout () {
       const _this = this
-      this.$axios.get('http://localhost:8081/logout', {
+      this.$axios.get('/logout', {
         headers: {
           Authorization: localStorage.getItem('token')
         }
