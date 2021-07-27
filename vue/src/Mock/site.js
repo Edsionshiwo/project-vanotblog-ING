@@ -9,11 +9,10 @@ export default [
                 code: 200,
                 data: {
                     avatar: 'https://s2.ax1x.com/2020/01/17/1SCadg.png',
-                    slogan: 'The way up is not crowded, and most chose ease.',
-                    name: 'FZY′blog',
-                    domain: 'https://www.fengziy.cn',
-                    notice: '本博客的Demo数据由Mockjs生成',
-                    desc: '一个It技术的探索者'
+                    slogan: '撸起袖子加油干.',
+                    name: '蒋荷包蛋',
+                    notice: '目前为 Demo 版本。',
+                    description: '一个涉猎广泛的后端工程师'
                 }
             }
         }

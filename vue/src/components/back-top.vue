@@ -1,8 +1,8 @@
 <template>
     <transition name="slide-fade">
         <div class="back-top" v-show="show" @click.stop="getTop">
-            <img class="img1" src="@/assets/_tortoise.svg" alt="">
-            <img class="img2" src="@/assets/tortoise.svg" alt="">
+            <img class="img1" src="@/assets/top1.svg" alt="">
+            <img class="img2" src="@/assets/top2.svg" alt="">
             <p>Top</p>
         </div>
     </transition>
@@ -53,16 +53,19 @@
     bottom: 8rem;
     border-radius: 25px;
     cursor: pointer;
-    opacity: .3;
+    opacity: .5;
     transition: .3s;
     text-align: center;
     z-index: 99;
     img{
         width: 60px;
         height: 60px;
+        filter: drop-shadow(#ffffff 80px 0)
+
     }
     .img2{
         display: none;
+
     }
     &:hover img.img1{
         display: none;

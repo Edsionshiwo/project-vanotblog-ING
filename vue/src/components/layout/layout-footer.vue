@@ -5,7 +5,7 @@
 <!--                <div>{{runTimeInterval}}</div>-->
 <!--            </div>-->
 <!--        </div>-->
-        <div class="copyright">Copyright © 2020 by <a target="_blank" class="out-link" href="https://www.fengziy.cn">fengziy.cn</a> . All rights reserved. | <a target="_blank" class="out-link" href="http://www.beian.miit.gov.cn">渝ICP备17015355号-1</a></div>
+        <div class="copyright">Copyright © 2021 by <a target="_blank" class="out-link" href="https://www.vanot.top">vanot.top</a> . All rights reserved. | <a target="_blank" class="out-link" href="http://www.beian.miit.gov.cn">浙ICP备17015355号-1</a></div>
     </div>
 </template>
 

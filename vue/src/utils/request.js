@@ -1,46 +1,34 @@
 import axios from 'axios'
 import store from '@/store'
+import router from "@/router";
 
 // create an axios instance
-const service = axios.create({
+const request = axios.create({
     baseURL: process.env.VUE_APP_BASE_API,
-    timeout: 5000 // request timeout
+    timeout: 5000
 })
 
 // request interceptor
-service.interceptors.request.use(
+request.interceptors.request.use(
     config => {
-        // do something before request is sent
-
-        // if (store.getters.token) {
-        //     config.headers['X-Token'] = getToken()
-        // }
+        console.log('前置拦截')
         return config
     },
     error => {
-        // do something with request error
         console.log(error) // for debug
-        return Promise.reject(error)
+        return Promise.reject(error || 'Error')
     }
 )
 
 // response interceptor
-service.interceptors.response.use(
-    /**
-     * If you want to get http information such as headers or status
-     * Please return  response => response
-     */
-
-    /**
-     * Determine the request status by custom code
-     * Here is just an example
-     * You can also judge the status by HTTP Status Code
-     */
+request.interceptors.response.use(
     response => {
+        console.log('后置拦截')
+
         const res = response.data
+
         // store.commit('SET_LOADING',false);
 
-        // if the custom code is not 20000, it is judged as an error.
         if (res.code !== 200) {
             return Promise.reject(new Error(res.message || 'Error'))
         } else {
@@ -48,9 +36,24 @@ service.interceptors.response.use(
         }
     },
     error => {
-        console.log('err' + error) // for debug
-        return Promise.reject(error)
+        console.log(error)// for debug
+        if (error.response.data) {
+            error.message = error.response.data.msg
+        }
+        // 未登录
+        if (error.response.status === 401) {
+            store.commit('REMOVE_INFO')
+            router.push({
+                path: '/login'
+            })
+            error.message = '请重新登录'
+        }
+        // 权限不足
+        if (error.response.status === 403) {
+            error.message = '权限不足，无法访问'
+        }
+        return Promise.reject(error || 'Error')
     }
 )
 
-export default service
+export default request

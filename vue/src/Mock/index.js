@@ -1,10 +1,10 @@
 
 const Mock = require('mockjs');
-import { param2Obj } from '../utils'
+import { param2Obj } from '@/utils'
 
 // 设置拦截ajax请求的相应时间
 Mock.setup({
-    timeout: '200-600'
+    timeout: '0'
 });
 function XHR2ExpressReqWrap(respond) {
     return function(options) {

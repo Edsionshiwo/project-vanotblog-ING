@@ -8,7 +8,6 @@ router.beforeEach((to, from, next) => {
 
     if (token) { // 判断当前的token是否存在 ； 登录存入的token
       if (to.path === '/login') {
-
       } else {
         next()
       }

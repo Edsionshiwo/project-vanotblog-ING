@@ -243,8 +243,8 @@ export function getTime(type) {
 
 /**
  * 获取时间间隔
- * @param startTime
- * @param endTime
+ * @param startDate
+ * @param endDate
  */
 export function getTimeInterval(startDate, endDate = Date.now()) {
   if (arguments.length === 0) {

@@ -2,7 +2,8 @@
     <article class="post post-list">
         <div class="post-entry">
             <h1 class="entry-title">
-                <router-link :to="`/article/${post.id}`">
+<!--            TODO    这里能否将整个 post 实例传入 Articles 页面，避免二次查询-->
+                <router-link :to="`/blog/${post.id}`">
                   <span v-if="post.isTop" style="color:#ff6d6d;font-weight:600">[置顶] </span>
                   {{post.title}}
                 </router-link>
@@ -31,14 +32,14 @@
 
 <script>
 
-    export default {
-        name: "post",
-        props: {
-            post: {
-                type: Object
-            }
+export default {
+    name: "post",
+    props: {
+        post: {
+            type: Object
         }
     }
+}
 </script>
 
 <style scoped lang="less">
@@ -63,7 +64,7 @@
             color: #737373;
 
             & a:hover {
-                color: #8fd0cc;
+                color: #ff6d6d;
             }
         }
 
