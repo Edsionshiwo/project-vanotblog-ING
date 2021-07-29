@@ -16,6 +16,11 @@ public class SiteController {
     @Autowired
     SiteService siteService;
 
+    @GetMapping("/hello")
+    public Result hello() {
+        return Result.succ("Hello");
+    }
+
     @GetMapping("/site")
     public Result siteInfo() {
         return Result.succ(siteService.getById(1));

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ *  User 服务实现类
  * </p>
  *
  * @author vanot313
