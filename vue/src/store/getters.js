@@ -16,6 +16,9 @@ const getters = {
             return state.userInfo
         }
         return null
+    },
+    getToken: state => {
+        return state.token
     }
 
 }

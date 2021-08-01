@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import {getToken} from "@/utils/cookie";
 
 export function fetchList(currentPage) {
     return request({
@@ -39,3 +40,22 @@ export function fetchSiteInfo() {
 //         params: {}
 //     })
 // }
+
+export function processLogin() {
+    return request({
+        url: '/login',
+        method: 'post',
+        params: {}
+    })
+}
+
+export function processLogout() {
+    return request({
+        url: '/logout',
+        method: 'get',
+        params: {},
+        headers: {
+            Authorization: localStorage.getItem('token')
+        }
+    })
+}

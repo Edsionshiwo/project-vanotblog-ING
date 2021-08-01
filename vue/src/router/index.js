@@ -8,19 +8,25 @@ const routes = [
     {
         path: '/',
         name: 'home',
-        component: () => import('../views/Home.vue'),
+        component: () => import('@/views/Home.vue'),
+        meta: { title: '首页'}
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import('@/views/Login.vue'),
         meta: { title: '首页'}
     },
     // {
     //     path: '/search/:words',
     //     name: 'search',
-    //     component: () => import('../views/Home.vue'),
+    //     component: () => import('@/views/Home.vue'),
     //     meta: { title: '搜索', params: 'words'}
     // },
     {
         path: '/about',
         name: 'about',
-        component: () => import('../views/About.vue'),
+        component: () => import('@/views/About.vue'),
         meta: { title: '关于'}
     },
     // {
@@ -32,7 +38,7 @@ const routes = [
     {
         path: '/blog/:id',
         name: 'blog',
-        component: () => import('../views/Articles.vue'),
+        component: () => import('@/views/Articles.vue'),
         meta: { title: '博客', params: 'id'}
     }
 ]
