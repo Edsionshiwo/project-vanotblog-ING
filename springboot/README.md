@@ -34,7 +34,7 @@
 
 ### 建立本地 Redis 数据库
 
-Windows 下的安装与配置参考：[Redis在windows下安装与配置 - pretty.sunshine - 博客园 (cnblogs.com)](https://www.cnblogs.com/pretty-sunshine/p/10615287.html)
+Windows 下的安装与配置参考：[在 windows 上安装 Redis](https://www.redis.com.cn/redis-installation.html)
 
 Linux 下的安装与配置参考：[(29条消息) 【redis】linux上的安装与配置（详细图解）_Jack小强-CSDN博客_redis安装部署linux](https://blog.csdn.net/yjqyyjw/article/details/73293455)
 
