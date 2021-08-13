@@ -1,22 +1,27 @@
 <template>
   <div>
-      <form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
-               class="demo-ruleForm">
-        <el-form-item label="用户名" prop="username">
-          <el-input type="text" maxlength="12" v-model="ruleForm.username"></el-input>
-        </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
-        </el-form-item>
+    <div class="form-login">
+      <form :model="ruleForm"  :rules="rules" ref="ruleForm"
+            class="demo-ruleForm">
+        <div label="用户名" prop="username">
+          <input  type="text" maxlength="12" v-model="ruleForm.username">
+        </div>
+        <div label="密码" prop="password">
+          <input  type="password" v-model="ruleForm.password" autocomplete="off">
+        </div>
+        <div>
+          <button  @click="submitForm('ruleForm')">登录</button>
+        </div>
       </form>
+    </div>
+
   </div>
 </template>
 <script>
+import About from "@/views/About";
 export default {
   name: 'Login',
+  components: {About},
   data () {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -62,3 +67,12 @@ export default {
   }
 }
 </script>
+
+<style>
+
+.form-login{
+  margin: 30% 30% 30% 30%;
+
+}
+
+</style>

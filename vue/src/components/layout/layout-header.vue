@@ -10,14 +10,15 @@
       <div class="site-item">
         <div id="login-circle">
           <div v-if="isLogin">
-            <router-link to="/login">
+            <div @click="logout">
               <img width="64px" height="64px" src="@/assets/login-circle-green.svg" alt="">
-            </router-link>
+            </div>
           </div>
           <div v-else>
-            <div @click="logout">
+            <router-link to="/login">
               <img width="64px" height="64px" src="@/assets/login-circle-red.svg" alt="">
-            </div>
+            </router-link>
+
 
           </div>
         </div>

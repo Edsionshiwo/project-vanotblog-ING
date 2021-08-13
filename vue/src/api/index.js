@@ -41,11 +41,11 @@ export function fetchSiteInfo() {
 //     })
 // }
 
-export function processLogin() {
+export function processLogin(data) {
     return request({
         url: '/login',
         method: 'post',
-        params: {}
+        data
     })
 }
 
