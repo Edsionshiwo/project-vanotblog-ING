@@ -49,6 +49,8 @@ const router = new VueRouter({
     routes
 })
 router.beforeEach((to, from, next) => {
+
+    // 处理页面 title 的层次
     let title = ''
     if (to.meta.params){
         title = `${to.meta.title}:${to.params[to.meta.params] || ''} - ${title}`

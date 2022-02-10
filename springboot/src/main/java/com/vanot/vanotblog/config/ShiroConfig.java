@@ -1,6 +1,6 @@
 package com.vanot.vanotblog.config;
 
-import com.vanot.vanotblog.shiro.AccountRealm;
+import com.vanot.vanotblog.shiro.*;
 import com.vanot.vanotblog.shiro.JwtFilter;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;

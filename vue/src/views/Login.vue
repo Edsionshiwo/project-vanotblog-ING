@@ -18,10 +18,9 @@
   </div>
 </template>
 <script>
-import About from "@/views/About";
 export default {
   name: 'Login',
-  components: {About},
+  components: {},
   data () {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -53,9 +52,15 @@ export default {
         if (valid) {
           // 提交逻辑
           this.$axios.post('/login', this.ruleForm).then((res) => {
+            console.log(this.ruleForm)
+
+
             const token = res.headers.authorization
             _this.$store.commit('SET_TOKEN', token)
             _this.$store.commit('SET_USERINFO', res.data.data)
+
+            console.log(res.data.data)
+
             _this.$router.push('/')
           })
         } else {
@@ -69,10 +74,7 @@ export default {
 </script>
 
 <style>
-
 .form-login{
   margin: 30% 30% 30% 30%;
-
 }
-
 </style>

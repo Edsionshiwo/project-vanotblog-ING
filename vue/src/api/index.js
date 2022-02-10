@@ -11,7 +11,7 @@ export function fetchList(currentPage) {
 
 export function fetchBlog(params) {
     return request({
-        url: '/blog/' + params.toString(),
+        url: '/blog' + params.toString(),
         method: 'get',
         params: {}
     })

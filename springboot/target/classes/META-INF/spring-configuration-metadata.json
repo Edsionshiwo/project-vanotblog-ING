@@ -10,8 +10,7 @@
     {
       "name": "vanotblog.jwt.expire",
       "type": "java.lang.Long",
-      "sourceType": "com.vanot.vanotblog.util.JwtUtils",
-      "defaultValue": 0
+      "sourceType": "com.vanot.vanotblog.util.JwtUtils"
     },
     {
       "name": "vanotblog.jwt.header",

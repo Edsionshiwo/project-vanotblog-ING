@@ -43,9 +43,9 @@ request.interceptors.response.use(
         // 未登录
         if (error.response.status === 401) {
             store.commit('REMOVE_INFO')
-            router.push({
-                path: '/login'
-            })
+            // router.push({
+            //     path: '/login'
+            // })
             error.message = '请重新登录'
         }
         // 权限不足

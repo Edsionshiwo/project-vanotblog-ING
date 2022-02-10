@@ -1,7 +1,7 @@
 import {fetchSiteInfo} from "@/api";
 
 const actions = {
-    getSiteInfo: ({commit,state}) =>{
+    getSiteInfo: ({commit,state}) => {
         return new Promise(resolve => {
             if (state.websiteInfo){
                 resolve(state.websiteInfo)

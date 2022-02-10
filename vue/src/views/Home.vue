@@ -59,8 +59,6 @@ export default {
   methods: {
     fetchList() {
       fetchList().then(res => {
-        console.log(res)
-
         this.records = res.data.records
         this.currentPage = res.data.current
         this.hasNextPage = (res.data.current < res.data.pages)
