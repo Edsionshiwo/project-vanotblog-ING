@@ -1,7 +1,9 @@
+import state from "@/store/state";
+
 const mutations = {
     SET_TOKEN: (state, token) => {
         state.token = token
-        localStorage.setItem('token', token)
+        sessionStorage.setItem('token', token)
     },
     SET_USERINFO: (state, userInfo) => {
         state.userInfo = userInfo
@@ -12,7 +14,7 @@ const mutations = {
         state.userInfo = {}
         localStorage.setItem('token', '')
         sessionStorage.setItem('userInfo', JSON.stringify(''))
-        localStorage.setIten('websiteInfo', null)
+        localStorage.setItem('websiteInfo', null)
     },
     SET_SITE_INFO: (state, v) =>{
         state.websiteInfo = v;

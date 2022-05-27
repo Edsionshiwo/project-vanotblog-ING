@@ -59,18 +59,18 @@ export default {
   methods: {
     fetchList() {
       fetchList().then(res => {
-        this.records = res.data.records
-        this.currentPage = res.data.current
-        this.hasNextPage = (res.data.current < res.data.pages)
+        this.records = res.data.data.records
+        this.currentPage = res.data.data.current
+        this.hasNextPage = (res.data.data.current < res.data.data.pages)
       }).catch(err => {
         console.log(err)
       })
     },
     loadMore() {
       fetchList( ++this.currentPage ).then(res => {
-        this.records = this.records.concat(res.data.records || [])
-        this.currentPage = res.data.current
-        this.hasNextPage = (res.data.current < res.data.pages)
+        this.records = this.records.concat(res.data.data.records || [])
+        this.currentPage = res.data.data.current
+        this.hasNextPage = (res.data.data.current < res.data.data.pages)
       })
     },
     getWebSiteInfo() {

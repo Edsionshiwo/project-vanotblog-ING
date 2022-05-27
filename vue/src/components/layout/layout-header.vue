@@ -92,7 +92,8 @@ export default {
     },
     judgeLogin() {
       this.isLogin = this.$store.getters.getToken !== ''
-      // console.log(this.isLogin)
+      console.log(123)
+      console.log(this.$store.getters.getToken)
     },
     logout () {
       const _this = this

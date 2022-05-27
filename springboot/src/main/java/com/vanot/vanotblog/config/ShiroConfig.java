@@ -27,9 +27,6 @@ import java.util.Map;
 /**
  * shiro启用注解拦截控制器
  */
-/**
- * shiro启用注解拦截控制器
- */
 @Configuration
 public class ShiroConfig {
     @Autowired
@@ -59,6 +56,7 @@ public class ShiroConfig {
     }
     @Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition() {
+
         DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
         Map<String, String> filterMap = new LinkedHashMap<>();
         filterMap.put("/**", "jwt"); // 主要通过注解方式校验权限

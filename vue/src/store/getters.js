@@ -1,8 +1,9 @@
 const getters = {
     websiteInfo: state => {
-        if (state.websiteInfo)
+        if (state.websiteInfo) {
             return state.websiteInfo
-        else if (localStorage.getItem('websiteInfo')){
+        }
+        else if (sessionStorage.getItem('websiteInfo')){
             state.websiteInfo = JSON.parse(localStorage.getItem('websiteInfo'))
             return state.websiteInfo
         }
@@ -18,7 +19,14 @@ const getters = {
         return null
     },
     getToken: state => {
-        return state.token
+        if (state.token)
+            return state.token
+        else if (sessionStorage.getItem('token')){
+            state.token = sessionStorage.getItem('token')
+            return state.token
+        }
+
+        return ''
     }
 
 }

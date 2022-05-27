@@ -7,7 +7,7 @@ const actions = {
                 resolve(state.websiteInfo)
             }else {
                 fetchSiteInfo().then(res => {
-                    let data = res.data || {}
+                    let data = res.data.data || {}
                     commit('SET_SITE_INFO',data);
                     resolve(data);
                 }).catch(err => {

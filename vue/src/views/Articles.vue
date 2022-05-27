@@ -62,7 +62,7 @@ export default {
   methods: {
     // getComment(){
     //     fetchComment().then(res => {
-    //         this.comments = res.data || []
+    //         this.comments = res.data.data || []
     //     }).catch(err => {
     //         console.log(err)
     //     })
@@ -70,7 +70,7 @@ export default {
     getArticle() {
       let id = this.$route.params.id
       fetchBlog(id).then(res => {
-        this.blog = res.data
+        this.blog = res.data.data
         const MarkdownIt = require('markdown-it')
         const md = new MarkdownIt()
         this.blog.content = md.render(this.blog.content)

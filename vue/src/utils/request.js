@@ -25,12 +25,13 @@ request.interceptors.response.use(
     response => {
         console.log('后置拦截')
 
-        const res = response.data
+        // 不止是从后端拿到的 Result，且包含返回 Http 协议报文的其他内容。
+        const res = response
 
         // store.commit('SET_LOADING',false);
 
-        if (res.code !== 200) {
-            return Promise.reject(new Error(res.message || 'Error'))
+        if (res.data.code !== 200) {
+            return Promise.reject(new Error(res.data.msg || 'Error'))
         } else {
             return res
         }

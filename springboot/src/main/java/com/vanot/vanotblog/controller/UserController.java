@@ -28,15 +28,13 @@ public class UserController {
 
     @GetMapping("/addOne")
     public void addOne(){
-        System.out.println("1111111");
-
-        String username = "root";
+        String username = "admin";
         String password = "123456";
         Integer status = 0;
 
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password);
+        user.setPassword(SecureUtil.md5(password));
         user.setStatus(status);
 
         userService.save(user);
