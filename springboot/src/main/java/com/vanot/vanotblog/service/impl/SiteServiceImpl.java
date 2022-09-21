@@ -17,4 +17,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SiteServiceImpl extends ServiceImpl<SiteMapper, Site> implements SiteService {
+
 }

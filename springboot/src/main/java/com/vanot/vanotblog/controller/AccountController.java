@@ -44,9 +44,13 @@ public class AccountController {
         if(!user.getPassword().equals(SecureUtil.md5(loginDto.getPassword()))){
             return Result.fail("密码不正确");
         }
+
+        // 生成 JWT TOKEN 携带用户信息
         String jwt = jwtUtils.generateToken(user.getId());
 
+        // JWT TOKEN 送回给前端
         response.setHeader("Authorization", jwt);
+        // 跨域暴露 JWT TOKEN
         response.setHeader("Access-control-Expose-Headers", "Authorization");
 
         return Result.succ(MapUtil.builder()
@@ -58,6 +62,11 @@ public class AccountController {
         );
     }
 
+    /**
+     * RequiresAuthentication 注解
+     * 来自 Shiro 表示该接口需要登陆验证
+     *
+     */
     @RequiresAuthentication
     @GetMapping("/logout")
     public Result logout() {

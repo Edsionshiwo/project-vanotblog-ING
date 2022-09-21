@@ -46,13 +46,10 @@ export default {
         _this.$store.commit('SET_TOKEN', token)
         _this.$store.commit('SET_USERINFO', res.data.data)
 
-
         console.log(res)
       }).catch(err => {
-        console.log(err) // for debug
+        console.log(err)
       })
-
-
     }
   }
 }

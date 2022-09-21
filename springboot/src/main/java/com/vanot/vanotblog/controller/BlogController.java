@@ -9,6 +9,7 @@ import com.vanot.vanotblog.common.lang.*;
 import com.vanot.vanotblog.entity.*;
 import com.vanot.vanotblog.service.*;
 import com.vanot.vanotblog.util.*;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;

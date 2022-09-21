@@ -36,17 +36,11 @@ public class Blog implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
-
-    private Long userId;
-
-    private String title;
-
-    private String description;
-
-    private String content;
-
-    private LocalDateTime created;
-
-    private Integer status;
+    Long id;
+    Long userId;
+    String title;
+    String description;
+    String content;
+    LocalDateTime created;
+    Integer status;
 }

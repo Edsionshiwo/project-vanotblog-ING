@@ -41,6 +41,7 @@ public class GlobalExceptionHandler {
     public Result handle401(ShiroException e) {
         return Result.fail(401, e.getMessage(), null);
     }
+
     /**
      * 处理Assert的异常
      */
@@ -50,6 +51,7 @@ public class GlobalExceptionHandler {
         log.error("Assert异常:-------------->{}",e.getMessage());
         return Result.fail(e.getMessage());
     }
+
     /**
      * @Validated 校验错误异常处理
      */

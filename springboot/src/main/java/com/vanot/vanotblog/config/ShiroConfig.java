@@ -1,7 +1,6 @@
 package com.vanot.vanotblog.config;
 
 import com.vanot.vanotblog.shiro.*;
-import com.vanot.vanotblog.shiro.JwtFilter;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SecurityManager;
@@ -31,60 +30,76 @@ import java.util.Map;
 public class ShiroConfig {
     @Autowired
     JwtFilter jwtFilter;
+
+
+    /**
+     * sessionManager 会话管理
+     * 配置 redis 相关
+     */
     @Bean
     public SessionManager sessionManager(RedisSessionDAO redisSessionDAO) {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         sessionManager.setSessionDAO(redisSessionDAO);
         return sessionManager;
     }
+
+    /**
+     * @param accountRealm      账户 account 部分的验证规则 Realm
+     * @param sessionManager    会话管理，完成了对 redis 的配置
+     * @param redisCacheManager redis 缓存管理
+     * @return securityManager  shiro 核心管理 根据 Realm 规则管理全部 Subject
+     */
     @Bean
     public DefaultWebSecurityManager securityManager(AccountRealm accountRealm,
                                                      SessionManager sessionManager,
                                                      RedisCacheManager redisCacheManager) {
+
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager(accountRealm);
         securityManager.setSessionManager(sessionManager);
         securityManager.setCacheManager(redisCacheManager);
-        /*
-         * 关闭shiro自带的session，详情见文档
-         */
-        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
-        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
-        defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
-        subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);
-        securityManager.setSubjectDAO(subjectDAO);
+
         return securityManager;
     }
+
+
+    /* 配置过滤器，实现对请求访问的控制 */
+
     @Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition() {
-
         DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
+
+        // 添加拦截路由路径，对任意请求经过 jwt 过滤器
         Map<String, String> filterMap = new LinkedHashMap<>();
-        filterMap.put("/**", "jwt"); // 主要通过注解方式校验权限
+        filterMap.put("/**", "jwt");
         chainDefinition.addPathDefinitions(filterMap);
+
         return chainDefinition;
     }
+
+
+    /**
+     * shiro 的核心起始类
+     * @param securityManager               shiro 核心管理
+     * @param shiroFilterChainDefinition    定义的过滤器拦截规则
+     * @return shiroFilterFactoryBean
+     */
     @Bean("shiroFilterFactoryBean")
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager,
                                                          ShiroFilterChainDefinition shiroFilterChainDefinition) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
+
+        // 设置核心管理 securityManager
         shiroFilter.setSecurityManager(securityManager);
+
+        // 添加 jwt 过滤器
         Map<String, Filter> filters = new HashMap<>();
         filters.put("jwt", jwtFilter);
         shiroFilter.setFilters(filters);
+
+        // 设置过滤器拦截规则 shiroFilterChainDefinition
         Map<String, String> filterMap = shiroFilterChainDefinition.getFilterChainMap();
         shiroFilter.setFilterChainDefinitionMap(filterMap);
+
         return shiroFilter;
-    }
-    // 开启注解代理（默认好像已经开启，可以不要）
-    @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
-        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
-        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
-        return authorizationAttributeSourceAdvisor;
-    }
-    @Bean
-    public static DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
-        DefaultAdvisorAutoProxyCreator creator = new DefaultAdvisorAutoProxyCreator();
-        return creator;
     }
 }

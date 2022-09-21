@@ -11,7 +11,8 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
- * jwt工具类
+ * jwt 工具
+ ** 生成 jwt 字段，保存用户 ID 信息用于验证用户是否登录
  */
 @Slf4j
 @Data
@@ -31,15 +32,22 @@ public class JwtUtils {
         //过期时间
         Date expireDate = new Date(nowDate.getTime() + expire * 1000);
 
+        // 设置 JWT 的 Header、Payload、Signature
         return Jwts.builder()
+                // Header
                 .setHeaderParam("typ", "JWT")
+                // Payload
                 .setSubject(userId+"")
                 .setIssuedAt(nowDate)
                 .setExpiration(expireDate)
+                // Signature
                 .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
     }
 
+    /**
+     * 获取 Claim，即 JWT 中 Payload 的内容。也是 JWT TOKEN 所携带的有效信息部分
+     */
     public Claims getClaimByToken(String token) {
         try {
             return Jwts.parser()
