@@ -10,8 +10,7 @@
           <input  type="password" v-model="ruleForm.password" autocomplete="off">
         </div>
         <div>
-          <button type="button" @click="submitForm('ruleForm')">登录</button>
-<!--          <button type="button">登录</button>-->
+          <button type="button" @click="submitForm()">登录</button>
         </div>
       </form>
     </div>
@@ -34,21 +33,17 @@ export default {
 
   },
   methods: {
-    submitForm (formName) {
+    submitForm () {
       const _this = this
 
       processLogin(this.ruleForm).then((res) => {
 
         const token = res.headers.authorization
 
-        console.log(token)
-
         _this.$store.commit('SET_TOKEN', token)
         _this.$store.commit('SET_USERINFO', res.data.data)
 
-        console.log(res)
       }).catch(err => {
-        console.log(err)
       })
     }
   }

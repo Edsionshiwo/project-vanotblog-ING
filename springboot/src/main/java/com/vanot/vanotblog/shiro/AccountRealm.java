@@ -1,10 +1,9 @@
 package com.vanot.vanotblog.shiro;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.vanot.vanotblog.entity.User;
-import com.vanot.vanotblog.service.UserService;
+import com.vanot.vanotblog.entity.Key;
+import com.vanot.vanotblog.service.KeyService;
 import com.vanot.vanotblog.util.JwtUtils;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 
 /**
+ * Realm 根据 Shiro SecurityManager 中的身份信息 Token 获取认证
  * 自定义 Realm 配置认证规则
  */
 @Component
@@ -23,10 +23,10 @@ public class AccountRealm extends AuthorizingRealm {
     JwtUtils jwtUtils;
 
     @Autowired
-    UserService userService;
+    KeyService keyService;
 
     /**
-     * 权限验证重载
+     * 权限认证
      * 执行 Subject 权限验证时被调用  Security.getSubject().isPermitted()
      */
     @Override
@@ -35,31 +35,37 @@ public class AccountRealm extends AuthorizingRealm {
     }
 
     /**
-     * 登录验证重载
-     * 执行 Subject 登录操作时被调用  Security.getSubject().login()
+     * 登录认证
+     * 执行 Subject 登录操作时被调用  subject.login()
      * 登录成功后通过 Security.getSubject().isAuthenticated() 查询登陆状态
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        System.out.println("DO GET AUT");
 
-        // 获取 JwtToken 中的有效信息，提取 userId
+        // 获取 JwtToken 中的有效信息，提取 keyId
         JwtToken jwtToken = (JwtToken) token;
-        String userId = jwtUtils.getClaimByToken((String) jwtToken.getPrincipal()).getSubject();
+        String keyId = jwtUtils.getClaimByToken((String) jwtToken.getPrincipal()).getSubject();
 
-
-        User user = userService.getById(Long.valueOf(userId));
-        if (user == null) {
-            throw new UnknownAccountException("账户不存在");
-        }
-        if (user.getStatus() == -1) {
-            throw new LockedAccountException("账户已被锁定");
+        Key key = keyService.getById(Integer.valueOf(keyId));
+        if (key == null) {
+            throw new UnknownAccountException("密钥不能被识别");
         }
 
         // 将 user 中的数据复制迁移到 profile
         AccountProfile profile = new AccountProfile();
-        BeanUtil.copyProperties(user, profile);
+        BeanUtil.copyProperties(key, profile);
 
         // getName() 传递当前 Realm 名称
         return new SimpleAuthenticationInfo(profile, jwtToken.getCredentials(), getName());
     }
+
+    /**
+     * supports 方法检测该 Realm 是否支持此 Token
+     */
+    @Override
+    public boolean supports(AuthenticationToken token) {
+        return token instanceof JwtToken;
+    }
+
 }

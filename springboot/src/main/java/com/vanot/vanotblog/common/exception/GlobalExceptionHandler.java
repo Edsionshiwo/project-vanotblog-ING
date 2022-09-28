@@ -30,8 +30,6 @@ import java.io.IOException;
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    // 捕捉shiro的异常
-
     /**
      * ResponseStatus 注解
      * 说明 HTTP 请求状态

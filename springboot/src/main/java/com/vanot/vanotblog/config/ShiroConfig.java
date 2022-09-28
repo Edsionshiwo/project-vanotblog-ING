@@ -70,6 +70,7 @@ public class ShiroConfig {
 
         // 添加拦截路由路径，对任意请求经过 jwt 过滤器
         Map<String, String> filterMap = new LinkedHashMap<>();
+        // 对任意请求用名为 jwt 的过滤器拦截
         filterMap.put("/**", "jwt");
         chainDefinition.addPathDefinitions(filterMap);
 
@@ -91,7 +92,7 @@ public class ShiroConfig {
         // 设置核心管理 securityManager
         shiroFilter.setSecurityManager(securityManager);
 
-        // 添加 jwt 过滤器
+        // 添加过滤器 jwt
         Map<String, Filter> filters = new HashMap<>();
         filters.put("jwt", jwtFilter);
         shiroFilter.setFilters(filters);

@@ -16,12 +16,12 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @TableName("m_key")
 public class Key implements Serializable {
-
+    // 序列化与反序列化时用于核验的版本号
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     Integer id;
     @NotBlank(message = "密钥不为空")
-    String key;
+    String keyvalue;
     Integer type;
 }

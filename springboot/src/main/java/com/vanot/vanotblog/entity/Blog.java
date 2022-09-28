@@ -37,10 +37,11 @@ public class Blog implements Serializable {
 
     @TableId(value = "id", type = IdType.AUTO)
     Long id;
-    Long userId;
+    String tags;
     String title;
     String description;
     String content;
     LocalDateTime created;
     Integer status;
+    Integer likes;
 }

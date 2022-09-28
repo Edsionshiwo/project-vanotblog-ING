@@ -2,6 +2,9 @@ package com.vanot.vanotblog.shiro;
 
 import org.apache.shiro.authc.AuthenticationToken;
 
+/**
+ * shiro 框架内的 Token 实例。
+ */
 public class JwtToken implements AuthenticationToken {
     private String token;
 

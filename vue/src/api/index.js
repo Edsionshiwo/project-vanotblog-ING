@@ -1,5 +1,4 @@
 import request from '@/utils/request'
-import {getToken} from "@/utils/cookie";
 
 export function fetchList(currentPage) {
     return request({
@@ -17,14 +16,6 @@ export function fetchBlog(params) {
     })
 }
 
-// export function fetchFriend() {
-//     return request({
-//         url: '/friend',
-//         method: 'get',
-//         params: {}
-//     })
-// }
-
 export function fetchSiteInfo() {
     return request({
         url: '/site',
@@ -32,14 +23,6 @@ export function fetchSiteInfo() {
         params: {}
     })
 }
-
-// export function fetchComment() {
-//     return request({
-//         url: '/comment',
-//         method: 'get',
-//         params: {}
-//     })
-// }
 
 export function processLogin(data) {
     return request({
