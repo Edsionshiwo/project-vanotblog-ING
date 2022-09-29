@@ -24,6 +24,24 @@ export function fetchSiteInfo() {
     })
 }
 
+export function processUnlock(data){
+    return request({
+        url: '/unlock',
+        method: 'post',
+        data
+    })
+}
+
+export function processLock() {
+    return request({
+        url: '/lock',
+        method: 'get',
+        headers: {
+            Authorization: localStorage.getItem('token')
+        }
+    })
+}
+
 export function processLogin(data) {
     return request({
         url: '/login',

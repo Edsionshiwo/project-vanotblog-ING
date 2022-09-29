@@ -47,6 +47,10 @@ public class BlogController {
         return Result.succ(blog);
     }
 
+    /**
+     * RequiresAuthentication 注解
+     * 来自 Shiro 表示该接口需要登陆验证
+     */
     @RequiresAuthentication
     @PostMapping("/blog/edit")
     public Result edit(@Validated @RequestBody Blog blog) {

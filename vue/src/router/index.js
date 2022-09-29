@@ -12,29 +12,17 @@ const routes = [
         meta: { title: '首页'}
     },
     {
-        path: '/login',
-        name: 'login',
-        component: () => import('@/views/Login.vue'),
-        meta: { title: '首页'}
+        path: '/unlock',
+        name: 'unlock',
+        component: () => import('@/views/Unlock.vue'),
+        meta: { title: '解锁'}
     },
-    // {
-    //     path: '/search/:words',
-    //     name: 'search',
-    //     component: () => import('@/views/Home.vue'),
-    //     meta: { title: '搜索', params: 'words'}
-    // },
     {
         path: '/about',
         name: 'about',
         component: () => import('@/views/About.vue'),
         meta: { title: '关于'}
     },
-    // {
-    //     path: '/friend',
-    //     name: 'friend',
-    //     component: () => import('../views/Friend.vue'),
-    //     meta: { title: '友链'}
-    // },
     {
         path: '/blog/:id',
         name: 'blog',
@@ -48,8 +36,8 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 })
-router.beforeEach((to, from, next) => {
 
+router.beforeEach((to, from, next) => {
     // 处理页面 title 的层次
     let title = ''
     if (to.meta.params){
@@ -62,7 +50,9 @@ router.beforeEach((to, from, next) => {
 
     next();
 })
+
 router.afterEach((to, from) => {
 
 })
+
 export default router

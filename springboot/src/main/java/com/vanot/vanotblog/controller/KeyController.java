@@ -44,22 +44,13 @@ public class KeyController {
 //
 //        return Result.succ(MapUtil.builder().put("id", keySubject.getId()).map());
 //    }
-    /**
-     * RequiresAuthentication 注解
-     * 来自 Shiro 表示该接口需要登陆验证
-     */
-    @RequiresAuthentication
-    @GetMapping("/data")
-    public Result data() {
-        return Result.succ("data");
-    }
 
 
     @PostMapping("/unlock")
     public Result unlock(@Validated @RequestBody KeyDto keyDto, HttpServletResponse response){
+
         Key key = keyService.getOne(new QueryWrapper<Key>().eq("keyvalue", SecureUtil.md5(keyDto.getKey())));
         Assert.notNull(key, "密钥不存在");
-
         // 生成 JWT TOKEN 携带密钥信息
         String jwt = jwtUtils.generateToken(key.getId());
         // JWT TOKEN 送回给前端

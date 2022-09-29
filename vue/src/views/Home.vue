@@ -1,12 +1,10 @@
 <template>
   <div class="home animate">
-    <!--        <banner isHome="true"></banner>-->
     <div class="site-content">
       <!--通知栏-->
       <div class="notify">
         <div class="search-result" v-if="hideSlogan">
           <span v-if="websiteInfo.notice"> {{ websiteInfo.notice }} </span>
-          <span v-if="searchWords">搜索结果："{{ searchWords }}" 相关文章</span>
         </div>
       </div>
 
@@ -27,7 +25,6 @@
 </template>
 
 <script>
-import Banner from '@/components/banner'
 import sectionTitle from '@/components/section-title'
 import Post from '@/components/post'
 import {fetchList} from '@/api'
@@ -44,16 +41,12 @@ export default {
     }
   },
   components: {
-    // Banner,
     sectionTitle,
     Post
   },
   computed: {
-    searchWords() {
-      return this.$route.params.words
-    },
     hideSlogan() {
-      return (this.searchWords || this.websiteInfo.notice)
+      return (this.websiteInfo.notice)
     }
   },
   methods: {

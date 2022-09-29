@@ -1,3 +1,5 @@
+// 全局获取数据的途径
+
 const getters = {
     websiteInfo: state => {
         if (state.websiteInfo) {
@@ -6,15 +8,6 @@ const getters = {
         else if (sessionStorage.getItem('websiteInfo')){
             state.websiteInfo = JSON.parse(localStorage.getItem('websiteInfo'))
             return state.websiteInfo
-        }
-        return null
-    },
-    getUser: state => {
-        if (state.userInfo)
-            return state.userInfo
-        else if (localStorage.getItem('userInfo')){
-            state.userInfo = JSON.parse(localStorage.getItem('userInfo'))
-            return state.userInfo
         }
         return null
     },

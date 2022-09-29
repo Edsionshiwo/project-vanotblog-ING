@@ -9,13 +9,13 @@
       </div>
       <div class="site-item">
         <div id="login-circle">
-          <div v-if="isLogin">
-            <div @click="logout">
+          <div v-if="isUnlock">
+            <div @click="lock">
               <img width="64px" height="64px" src="@/assets/login-circle-green.svg" alt="">
             </div>
           </div>
           <div v-else>
-            <router-link to="/login">
+            <router-link to="/unlock">
               <img width="64px" height="64px" src="@/assets/login-circle-red.svg" alt="">
             </router-link>
 
@@ -25,23 +25,12 @@
       </div>
     </div>
     <div class="site-menus">
-      <!--            <div class="menu-item header-search">-->
-      <!--              <header-search/>-->
-      <!--            </div>-->
       <div class="menu-item">
         <router-link to="/">
           首页
         </router-link>
       </div>
-      <!--            <div class="menu-item hasChild">-->
-      <!--                <a href="#">文章</a>-->
-      <!--                <div class="childMenu" v-if="category.length">-->
-      <!--                    <div class="sub-menu" v-for="item in category" :key="item.title">-->
-      <!--                      <router-link :to="`/category/${item.title}`">{{item.title}}</router-link>-->
-      <!--                    </div>-->
-      <!--                </div>-->
-      <!--            </div>-->
-      <!--            <div class="menu-item"><router-link to="/friend">友链</router-link></div>-->
+
       <div class="menu-item">
         <router-link to="/about">
           关于
@@ -52,23 +41,21 @@
 </template>
 
 <script>
-import HeaderSearch from '@/components/header-search'
 import {processLogout} from "@/api";
 
 export default {
   name: "layout-header",
-  components: {HeaderSearch},
   data() {
     return {
       lastScrollTop: 0,
       fixed: false,
       hidden: false,
       category: [],
-      isLogin: false
+      isUnlock: false
     }
   },
   created() {
-    this.judgeLogin()
+    this.judgeUnlock()
   },
   mounted() {
     window.addEventListener('scroll', this.watchScroll)
@@ -90,17 +77,14 @@ export default {
       }
       this.lastScrollTop = scrollTop
     },
-    judgeLogin() {
-      this.isLogin = this.$store.getters.getToken !== ''
-      console.log(123)
-      console.log(this.$store.getters.getToken)
+    judgeUnlock() {
+      this.isUnlock = this.$store.getters.getToken !== ''
     },
-    logout () {
+    lock () {
       const _this = this
       processLogout().then(() => {
         _this.$store.commit('REMOVE_INFO')
         _this.$router.push('/')
-
       })
   },
 

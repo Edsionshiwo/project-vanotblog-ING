@@ -24,14 +24,6 @@
             <p>本网站采用<a href="https://creativecommons.org/licenses/by-nc-sa/3.0/"target="_blank">BY-NC-SA</a>协议进行授权</p>
             <p>转载：转载请注明原文链接 - <a href="/">{{ blog.title }}</a></p>
           </div>
-          <!--评论-->
-          <!--                    <div class="comments">-->
-          <!--                        <comment v-for="item in comments" :key="item.comment.id" :comment="item.comment">-->
-          <!--                            <template v-if="item.reply.length">-->
-          <!--                                <comment v-for="reply in item.reply" :key="reply.id" :comment="reply"></comment>-->
-          <!--                            </template>-->
-          <!--                        </comment>-->
-          <!--                    </div>-->
         </article>
       </main>
     </div>
@@ -40,33 +32,22 @@
 
 <script>
 import sectionTitle from '@/components/section-title'
-// import comment from '@/components/comment'
 import menuTree from '@/components/menu-tree'
-// import {fetchComment} from '@/api'
 import {fetchBlog} from '@/api'
 
 export default {
   name: 'articles',
   data() {
     return {
-      // comments: [],
       menus: [],
       blog: {},
     }
   },
   components: {
     sectionTitle,
-    // comment,
     menuTree
   },
   methods: {
-    // getComment(){
-    //     fetchComment().then(res => {
-    //         this.comments = res.data.data || []
-    //     }).catch(err => {
-    //         console.log(err)
-    //     })
-    // },
     getArticle() {
       let id = this.$route.params.id
       fetchBlog(id).then(res => {
@@ -121,7 +102,6 @@ export default {
   },
   created() {
     this.getArticle()
-    // this.getComment()
   }
 }
 </script>

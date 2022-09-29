@@ -1,5 +1,6 @@
 import {fetchSiteInfo} from "@/api";
 
+
 const actions = {
     getSiteInfo: ({commit,state}) => {
         return new Promise(resolve => {

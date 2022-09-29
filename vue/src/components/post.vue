@@ -12,19 +12,6 @@
                 <i v-if="post.isHot" class="iconfont iconfire" style="margin-left: 5px;color: #ff6d6d;"></i>
             </div>
             <p class="summary">{{post.description}}</p>
-<!--            <footer class="entry-footer">-->
-<!--                <div class="info-meta">-->
-<!--                    <div class="comnum">-->
-<!--                        <span>-->
-<!--                            <i class="iconfont iconcomment"></i>-->
-<!--                            <a href="https://zhebk.cn/Web/Akina.html">{{post.commentsCount}} 条评论</a>-->
-<!--                        </span>-->
-<!--                    </div>-->
-<!--                    <div class="views">-->
-<!--                        <span><i class="iconfont iconeyes"></i>{{post.viewsCount}} 热度</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </footer>-->
         </div>
         <hr/>
     </article>
