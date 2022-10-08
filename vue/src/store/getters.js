@@ -18,6 +18,10 @@ const getters = {
             state.token = sessionStorage.getItem('token')
             return state.token
         }
+        else if (localStorage.getItem('token')){
+            state.token = localStorage.getItem('token')
+            return state.token
+        }
 
         return ''
     }

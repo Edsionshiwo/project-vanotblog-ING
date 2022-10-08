@@ -61,16 +61,20 @@ public class JwtFilter extends AuthenticatingFilter {
             return true;
         } else {
             // 校验 jwt
+            System.out.println("JWT " + jwt);
+
             Claims claim = jwtUtils.getClaimByToken(jwt);
-            if(claim == null || jwtUtils.isTokenExpired(claim.getExpiration())) {
+            System.out.println("SUBJECT " + claim.getSubject());
+
+            if(jwtUtils.isTokenExpired(claim.getExpiration())) {
                 throw new ExpiredCredentialsException("token 已失效，请重新登录");
             }
+        }
             System.out.println("LOGIN");
 
             // 执行登录
             return executeLogin(servletRequest, servletResponse);
         }
-    }
 
     /**
      * 登录失败执行该方法

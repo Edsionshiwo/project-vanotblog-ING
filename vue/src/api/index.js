@@ -35,28 +35,7 @@ export function processUnlock(data){
 export function processLock() {
     return request({
         url: '/lock',
-        method: 'get',
-        headers: {
-            Authorization: localStorage.getItem('token')
-        }
+        method: 'get'
     })
 }
 
-export function processLogin(data) {
-    return request({
-        url: '/login',
-        method: 'post',
-        data
-    })
-}
-
-export function processLogout() {
-    return request({
-        url: '/logout',
-        method: 'get',
-        params: {},
-        headers: {
-            Authorization: localStorage.getItem('token')
-        }
-    })
-}

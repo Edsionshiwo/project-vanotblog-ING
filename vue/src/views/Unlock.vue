@@ -21,17 +21,15 @@ export default {
         key: ''
       }
     }
-
   },
   methods: {
     submitForm(e) {
       if (e.keyCode === 13) {
-
         processUnlock(this.ruleForm).then((res) => {
-
           const token = res.headers.authorization
-          this.$store.commit('SET_TOKEN', token)
+          console.log(token)
 
+          this.$store.commit('SET_TOKEN', token)
         }).catch(err => {
           this.$message({
             message: "87987",

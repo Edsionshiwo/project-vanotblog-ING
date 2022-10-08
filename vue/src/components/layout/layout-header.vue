@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import {processLogout} from "@/api";
+import {processLock} from "@/api";
 
 export default {
   name: "layout-header",
@@ -82,7 +82,7 @@ export default {
     },
     lock () {
       const _this = this
-      processLogout().then(() => {
+      processLock().then(() => {
         _this.$store.commit('REMOVE_INFO')
         _this.$router.push('/')
       })
