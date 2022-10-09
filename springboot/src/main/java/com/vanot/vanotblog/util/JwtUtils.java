@@ -27,7 +27,7 @@ public class JwtUtils {
     /**
      * 生成jwt token
      */
-    public String generateToken(long userId) {
+    public String generateToken(long id) {
         Date nowDate = new Date();
         //过期时间
         Date expireDate = new Date(nowDate.getTime() + expire * 1000);
@@ -37,7 +37,7 @@ public class JwtUtils {
                 // Header
                 .setHeaderParam("typ", "JWT")
                 // Payload
-                .setSubject(userId+"")
+                .setSubject(id+"")
                 .setIssuedAt(nowDate)
                 .setExpiration(expireDate)
                 // Signature
@@ -50,6 +50,7 @@ public class JwtUtils {
      */
     public Claims getClaimByToken(String token) {
         try {
+            // 若 token 有效期过了，将抛出异常
             return Jwts.parser()
                     .setSigningKey(secret)
                     .parseClaimsJws(token)
@@ -58,13 +59,5 @@ public class JwtUtils {
             log.debug("validate is token error ", e);
             return null;
         }
-    }
-
-    /**
-     * token是否过期
-     * @return  true：过期
-     */
-    public boolean isTokenExpired(Date expiration) {
-        return expiration.before(new Date());
     }
 }

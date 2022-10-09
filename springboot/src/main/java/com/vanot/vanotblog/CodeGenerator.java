@@ -25,7 +25,6 @@ public class CodeGenerator {
     private static String driverName = "com.mysql.cj.jdbc.Driver";
     private static String userName = "root";
     private static String password = "Jiang123";
-    private static String schemaName = "";
 
 
     /**

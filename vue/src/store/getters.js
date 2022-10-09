@@ -1,5 +1,4 @@
 // 全局获取数据的途径
-
 const getters = {
     websiteInfo: state => {
         if (state.websiteInfo) {
@@ -12,8 +11,10 @@ const getters = {
         return null
     },
     getToken: state => {
-        if (state.token)
+        if (state.token){
+            console.log("GETTERS " + state.token)
             return state.token
+        }
         else if (sessionStorage.getItem('token')){
             state.token = sessionStorage.getItem('token')
             return state.token

@@ -49,6 +49,7 @@ public class JwtFilter extends AuthenticatingFilter {
 
     /**
      * 在未登录的状态下通过该方法拦截请求。
+     * 检查
      */
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
@@ -60,18 +61,14 @@ public class JwtFilter extends AuthenticatingFilter {
         if(StringUtils.isEmpty(jwt)) {
             return true;
         } else {
-            // 校验 jwt
-            System.out.println("JWT " + jwt);
-
+            // 获取 token 中的主体信息 claim。
+            // 若 token 过期失效，则返回 null
             Claims claim = jwtUtils.getClaimByToken(jwt);
-            System.out.println("SUBJECT " + claim.getSubject());
 
-            if(jwtUtils.isTokenExpired(claim.getExpiration())) {
+            if(claim == null) {
                 throw new ExpiredCredentialsException("token 已失效，请重新登录");
             }
         }
-            System.out.println("LOGIN");
-
             // 执行登录
             return executeLogin(servletRequest, servletResponse);
         }

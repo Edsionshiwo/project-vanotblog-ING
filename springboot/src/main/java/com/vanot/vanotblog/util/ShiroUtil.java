@@ -4,6 +4,10 @@ import com.vanot.vanotblog.shiro.AccountProfile;
 import org.apache.shiro.SecurityUtils;
 
 
+/**
+ * shiro 工具
+ * 用于获取当前 Subject 标识
+ */
 public class ShiroUtil {
     public static AccountProfile getProfile() {
         /*
@@ -18,7 +22,7 @@ public class ShiroUtil {
          */
 
         /*
-         * 获取 Subject 的唯一标识，即用户 ID
+         * 获取 Subject 的唯一标识，即 Key
          */
         return (AccountProfile) SecurityUtils.getSubject().getPrincipal();
     }

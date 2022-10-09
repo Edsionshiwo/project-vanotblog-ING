@@ -1,5 +1,6 @@
 import axios from 'axios'
-import store from '@/store'
+import getters from '@/store/getters'
+import store from "@/store";
 
 const request = axios.create({
     baseURL: process.env.VUE_APP_BASE_API,
@@ -8,13 +9,12 @@ const request = axios.create({
 
 // request 过滤器
 request.interceptors.request.use(
-    request => {
-        let token = this.$store.getters.getToken
+    config => {
+        let token = getters.getToken
         if(token !== null || token !== ""){
             request.headers = token
         }
-
-        return request
+        return config
     },
     error => {
         return Promise.reject(error || 'Error')

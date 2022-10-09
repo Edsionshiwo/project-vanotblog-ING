@@ -12,6 +12,7 @@ import com.vanot.vanotblog.service.KeyService;
 import com.vanot.vanotblog.util.JwtUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+
+import static org.apache.shiro.SecurityUtils.getSubject;
 
 @RestController()
 public class KeyController {
@@ -46,6 +49,7 @@ public class KeyController {
 //    }
 
 
+
     @PostMapping("/unlock")
     public Result unlock(@Validated @RequestBody KeyDto keyDto, HttpServletResponse response){
 
@@ -58,7 +62,7 @@ public class KeyController {
         // 跨域暴露 JWT TOKEN
         response.setHeader("Access-control-Expose-Headers", "Authorization");
 
-
+        System.out.println(jwt);
 
         return Result.succ(MapUtil.builder().put("id", key.getId()).map());
     }
@@ -70,7 +74,14 @@ public class KeyController {
     @RequiresAuthentication
     @GetMapping("/lock")
     public Result lock() {
-        SecurityUtils.getSubject().logout();
+        getSubject().logout();
         return Result.succ(null);
+    }
+
+    @RequiresAuthentication
+    @GetMapping("getkey")
+    public Result getkey(){
+        Subject subject = getSubject();
+        return Result.succ(subject.getPrincipal());
     }
 }
